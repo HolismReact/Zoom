@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+  cdn:
+    image: node:14-buster-slim
+    container_name: ZoomCdn
+    ports:
+      - 9999:9999
+    working_dir: /CDN
+    volumes:
+      - /HolismReact/Zoom/CDN:/CDN
+    command: >
+      sh -c
+      "
+      npm install &&
+      npm start &
+      tail -f /dev/null
+      "
