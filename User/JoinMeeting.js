@@ -37,20 +37,26 @@ const JoinMeeting = () => {
 
     const join = () => {
         setProgress(true);
-        get(`/zoom/generateToken?meetingNumber=${meetingNumber}`).then(data => {
-            setProgress(false);
-            app.success('You are joining ...');
-            client.join({
-                apiKey: `${process.env.REACT_APP_ZOOM_API_KEY}`,
-                signature: data.signature,
-                meetingNumber: meetingNumber,
-                password: password,
-                userName: app.user()
-            })
-        }, error => {
-            setProgress(false);
-            app.error(error);
-        });
+        // get(`/zoom/generateToken?meetingNumber=${meetingNumber}`).then(data => {
+        //     console.log(data);
+        //     setProgress(false);
+        //     app.success('You are joining ...');
+        //     try {
+        //         client.join({
+        //             apiKey: `${process.env.REACT_APP_ZOOM_API_KEY}`,
+        //             signature: data.signature,
+        //             meetingNumber: meetingNumber,
+        //             password: password,
+        //             userName: app.user()
+        //         })
+        //     }
+        //     catch (ex) {
+        //         app.error(ex);
+        //     }
+        // }, error => {
+        //     setProgress(false);
+        //     app.error(error);
+        // });
     }
 
     return <div>
@@ -65,12 +71,17 @@ const JoinMeeting = () => {
             onChange={(e) => setMeetingNumber(e.target.value)}
         />
 
+        <br />
+        <br />
+
         <TextField
             label={app.t('Password')}
             helperText='Required'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
         />
+        <br />
+        <br />
         <Button
             variant="outlined"
             onClick={() => join()}>
