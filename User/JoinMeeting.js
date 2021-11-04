@@ -37,26 +37,26 @@ const JoinMeeting = () => {
 
     const join = () => {
         setProgress(true);
-        // get(`/zoom/generateToken?meetingNumber=${meetingNumber}`).then(data => {
-        //     console.log(data);
-        //     setProgress(false);
-        //     app.success('You are joining ...');
-        //     try {
-        //         client.join({
-        //             apiKey: `${process.env.REACT_APP_ZOOM_API_KEY}`,
-        //             signature: data.signature,
-        //             meetingNumber: meetingNumber,
-        //             password: password,
-        //             userName: app.user()
-        //         })
-        //     }
-        //     catch (ex) {
-        //         app.error(ex);
-        //     }
-        // }, error => {
-        //     setProgress(false);
-        //     app.error(error);
-        // });
+        get(`/zoom/generateToken?meetingNumber=${meetingNumber}`).then(data => {
+            console.log(data);
+            setProgress(false);
+            app.success('You are joining ...');
+            try {
+                client.join({
+                    apiKey: `${process.env.REACT_APP_ZOOM_API_KEY}`,
+                    signature: data.signature,
+                    meetingNumber: meetingNumber,
+                    password: password,
+                    userName: app.user()
+                })
+            }
+            catch (ex) {
+                app.error(ex);
+            }
+        }, error => {
+            setProgress(false);
+            app.error(error);
+        });
     }
 
     return <div>
