@@ -43,7 +43,7 @@ const JoinMeeting = () => {
             app.success('You are joining ...');
             try {
                 client.join({
-                    apiKey: `${process.env.REACT_APP_ZOOM_API_KEY}`,
+                    apiKey: `${process.env.VITE_ZOOM_API_KEY}`,
                     signature: data.signature,
                     meetingNumber: meetingNumber,
                     password: password,
